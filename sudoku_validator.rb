@@ -18,9 +18,9 @@ class SudokuValidator
     end
 
     # validate vertical rows
-    i = 0
+    ix = 0
     column_index = 0
-    while i < 9
+    while ix < 9
       row_items = []
       str.split("\n").each { |row|
         if row != '------+-------+------'
@@ -37,12 +37,10 @@ class SudokuValidator
           end
         end
 
-        i += 1
+        ix += 1
       end
 
     # validate squares
-    # squares blocks row 1
-    i = 0
     if !boxCheck(str, 0, 2, 0, 2)
       return false
     end
@@ -76,9 +74,9 @@ class SudokuValidator
 
   def boxCheck(str, row_begin, row_end, col_begin, col_end)
     row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= col_begin and k <= col_end && j >= row_begin and j <= row_end
+    str.split("\n").each_with_index do |row, jx|
+      row.split(' ').each_with_index do |col, kx|
+        if kx >= col_begin and kx <= col_end && jx >= row_begin and jx <= row_end
           row_items.push(col)
         end
       end
