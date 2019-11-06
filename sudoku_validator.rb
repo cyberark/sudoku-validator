@@ -14,39 +14,28 @@ class SudokuValidator
     num_values = matrix.count
 
     # validate horizontal rows
-    num_values.times do |jx|
-      return false unless box_check(matrix, jx, 1, 0, num_values)
-    end
-
+    return false unless box_check(matrix, 1)
     # validate vertical rows
-    num_values.times do |kx|
-      return false unless box_check(matrix, 0, num_values, kx, 1)
-    end
-
-    # validate squares
+    return false unless box_check(matrix, matrix.count)
+    # validate boxes
     return true if box_height == 0
-    box_width = num_values / box_height
-    # For a sudoku grid with boxes X numbers tall and Y numbers wide, the grid
-    # will be XY*XY large and be Y boxes tall and X boxes wide.  Therefore if jx
-    # is the index of a row of boxes, I want to step jx by the box height X over
-    # box width Y cycles.
-    box_width.times do |jx|
-      box_height.times do |kx|
-        return false unless box_check(matrix, jx * box_height, box_height, kx * box_width, box_width)
-      end
-    end
-
-    return true
+    return box_check(matrix, box_height)
   end
 
-  def box_check(matrix, row_begin, num_rows, col_begin, num_cols)
-    row_items = []
-    num_rows.times do |jx|
-      num_cols.times do |kx|
-        row_items.push(matrix[row_begin+jx][col_begin+kx])
+  def box_check(matrix, box_height)
+    box_width = matrix.count / box_height
+    box_width.times do |box_x|
+      box_height.times do |box_y|
+        row_items = []
+        box_height.times do |cell_x|
+          box_width.times do |cell_y|
+            row_items.push(matrix[box_x * box_height + cell_x][box_y * box_width + cell_y])
+          end
+        end
+        return false unless row_items.uniq.count == matrix.count
       end
     end
-    return row_items.uniq.count == matrix.count
+    return true
   end
 
 end
