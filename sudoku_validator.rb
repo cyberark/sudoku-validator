@@ -24,12 +24,11 @@ class SudokuValidator
     end
 
     # validate squares
-    if box_height != 0
-      box_width = num_values / box_height
-      (0..num_values-box_height).step(box_height).each do |jx|
-        (0..num_values-box_width).step(box_width).each do |kx|
-          return false unless box_check(matrix, jx, jx + box_height - 1, kx, kx + box_width - 1)
-        end
+    return true if box_height == 0
+    box_width = num_values / box_height
+    (0..num_values-box_height).step(box_height).each do |jx|
+      (0..num_values-box_width).step(box_width).each do |kx|
+        return false unless box_check(matrix, jx, jx + box_height - 1, kx, kx + box_width - 1)
       end
     end
 
