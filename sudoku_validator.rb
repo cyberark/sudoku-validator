@@ -8,27 +8,29 @@ class SudokuValidator
         matrix.push(row.split(/ \| | /))
       end
     end
-    p matrix
+    numValues = matrix.count
 
     # validate horizontal rows
-    for jx in 0..8
-      if !boxCheck(matrix, jx, jx, 0, 8)
+    for jx in 0..numValues-1
+      if !boxCheck(matrix, jx, jx, 0, numValues-1)
         return false
       end
     end
 
     # validate vertical rows
-    for kx in 0..8
-      if !boxCheck(matrix, 0, 8, kx, kx)
+    for kx in 0..numValues-1
+      if !boxCheck(matrix, 0, numValues-1, kx, kx)
         return false
       end
     end
 
     # validate squares
-    for jx in [0, 3, 6]
-      for kx in [0, 3, 6]
-        if !boxCheck(matrix, jx, jx + 2, kx, kx + 2)
-          return false
+    if numValues == 9
+      for jx in [0, 3, 6]
+        for kx in [0, 3, 6]
+          if !boxCheck(matrix, jx, jx + 2, kx, kx + 2)
+            return false
+          end
         end
       end
     end
@@ -43,7 +45,7 @@ class SudokuValidator
         row_items.push(matrix[jx][kx])
       end
     end
-    if row_items.uniq.count < 9
+    if row_items.uniq.count < matrix.count
       return false
     end
     return true
