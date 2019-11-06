@@ -43,11 +43,42 @@ class SudokuValidator
     # validate squares
     # squares blocks row 1
     i = 0
+    if !boxCheck(str, 0, 2, 0, 2)
+      return false
+    end
+    if !boxCheck(str, 0, 2, 4, 6)
+      return false
+    end
+    if !boxCheck(str, 0, 2, 8, 10)
+      return false
+    end
+    if !boxCheck(str, 4, 6, 0, 2)
+      return false
+    end
+    if !boxCheck(str, 4, 6, 4, 6)
+      return false
+    end
+    if !boxCheck(str, 4, 6, 8, 10)
+      return false
+    end
+    if !boxCheck(str, 8, 10, 0, 2)
+      return false
+    end
+    if !boxCheck(str, 8, 10, 4, 6)
+      return false
+    end
+    if !boxCheck(str, 8, 10, 8, 10)
+      return false
+    end
+
+    return true
+  end
+
+  def boxCheck(str, row_begin, row_end, col_begin, col_end)
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=0 and j < 3
-          # puts "col: #{col}"
+        if k >= col_begin and k <= col_end && j >= row_begin and j <= row_end
           row_items.push(col)
         end
       end
@@ -55,107 +86,6 @@ class SudokuValidator
     if row_items.uniq.count < 9
       return false
     end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=0 and j < 3
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=0 and j < 3
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    # squares blocks row 2
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=4 and j < 7
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    # squares blocks row 3
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
     return true
   end
 
