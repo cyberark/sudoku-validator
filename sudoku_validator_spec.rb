@@ -133,9 +133,7 @@ describe SudokuValidator do
         '3 4 | 1 2',
         '4 1 | 2 3'
       ].join("\n")
-      # Box check is not yet implemented for grids other than 9x9.
-      #@sudoku_validator.valid?(invalid_grid).must_equal false
-      @sudoku_validator.valid?(invalid_grid).must_equal true
+      @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
     it "returns true when given a valid 6x6 grid" do
@@ -187,9 +185,7 @@ describe SudokuValidator do
         '4 3 | 6 2 | 5 1',
         '6 5 | 2 4 | 1 3'
       ].join("\n")
-      # Box check is not yet implemented for grids other than 9x9.
-      #@sudoku_validator.valid?(invalid_grid).must_equal false
-      @sudoku_validator.valid?(invalid_grid).must_equal true
+      @sudoku_validator.valid?(invalid_grid).must_equal false
     end
   end
 end

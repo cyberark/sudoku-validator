@@ -2,10 +2,13 @@ class SudokuValidator
 
   def valid?(str)
     # convert string to matrix
+    boxHeight = 0
     matrix = []
-    str.split("\n").each do |row|
+    str.split("\n").each_with_index do |row, ix|
       if !row.include? "+"
         matrix.push(row.split(/ \| | /))
+      elsif boxHeight == 0
+        boxHeight = ix;
       end
     end
     numValues = matrix.count
@@ -25,13 +28,14 @@ class SudokuValidator
     end
 
     # validate squares
-    if numValues == 9
-      for jx in [0, 3, 6]
-        for kx in [0, 3, 6]
-          if !boxCheck(matrix, jx, jx + 2, kx, kx + 2)
-            return false
-          end
-        end
+    if boxHeight != 0
+      boxWidth = numValues / boxHeight
+      for jx in (0..numValues-boxHeight).step(boxHeight)
+       for kx in (0..numValues-boxWidth).step(boxWidth)
+         if !boxCheck(matrix, jx, jx + boxHeight - 1, kx, kx + boxWidth - 1)
+           return false
+         end
+       end
       end
     end
 
