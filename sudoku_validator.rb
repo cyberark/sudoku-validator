@@ -3,7 +3,7 @@ class SudokuValidator
   def valid?(str)
     # validate horizontal rows
     str.split("\n").each do |row|
-      if row != '------+------+------'
+      if row != '------+-------+------'
         rowItems = []
         row.split(' ').each do |col|
           if col != '|'
@@ -23,7 +23,7 @@ class SudokuValidator
     while i < 9
       row_items = []
       str.split("\n").each { |row|
-        if row != '------+------+------'
+        if row != '------+-------+------'
           row_items << row[column_index]
         end
       }
