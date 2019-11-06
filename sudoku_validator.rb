@@ -11,43 +11,18 @@ class SudokuValidator
     p matrix
 
     # validate horizontal rows
-    str.split("\n").each do |row|
-      if !row.include? "+"
-        rowItems = []
-        row.split(' ').each do |col|
-          if col != '|'
-            rowItems.push(col)
-          end
-        end
-        puts rowItems.uniq.count
-        if rowItems.uniq.count < 9
-          return false
-        end
+    for jx in 0..8
+      if !boxCheck(matrix, jx, jx, 0, 8)
+        return false
       end
     end
 
     # validate vertical rows
-    ix = 0
-    column_index = 0
-    while ix < 9
-      row_items = []
-      str.split("\n").each { |row|
-        if !row.include? "+"
-          row_items << row[column_index]
-        end
-      }
-      # puts "selected items: #{row_items.inspect}"
-        if row_items.uniq.count < 9
-          return false
-        else
-          column_index += 2
-          if str.split("\n").first[column_index] == '|'
-            column_index += 2
-          end
-        end
-
-        ix += 1
+    for kx in 0..8
+      if !boxCheck(matrix, 0, 8, kx, kx)
+        return false
       end
+    end
 
     # validate squares
     for jx in [0, 3, 6]
