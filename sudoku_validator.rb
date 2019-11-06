@@ -8,7 +8,7 @@ class SudokuValidator
       if !row.include? "+"
         matrix.push(row.split(/ \| | /))
       elsif box_height == 0
-        box_height = ix;
+        box_height = ix
       end
     end
 
