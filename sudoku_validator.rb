@@ -15,16 +15,12 @@ class SudokuValidator
 
     # validate horizontal rows
     (0..num_values-1).each do |jx|
-      if !box_check(matrix, jx, jx, 0, num_values-1)
-        return false
-      end
+      return false if !box_check(matrix, jx, jx, 0, num_values-1)
     end
 
     # validate vertical rows
     (0..num_values-1).each do |kx|
-      if !box_check(matrix, 0, num_values-1, kx, kx)
-        return false
-      end
+      return false if !box_check(matrix, 0, num_values-1, kx, kx)
     end
 
     # validate squares
@@ -32,9 +28,7 @@ class SudokuValidator
       box_width = num_values / box_height
       (0..num_values-box_height).step(box_height).each do |jx|
         (0..num_values-box_width).step(box_width).each do |kx|
-          if !box_check(matrix, jx, jx + box_height - 1, kx, kx + box_width - 1)
-            return false
-          end
+          return false if !box_check(matrix, jx, jx + box_height - 1, kx, kx + box_width - 1)
         end
       end
     end
