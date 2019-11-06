@@ -57,16 +57,15 @@ class SudokuValidator
         end
       end
     end
+
     return true
   end
 
   def boxCheck(matrix, row_begin, row_end, col_begin, col_end)
     row_items = []
-    matrix.each_with_index do |row, jx|
-      row.each_with_index do |col, kx|
-        if kx >= col_begin and kx <= col_end && jx >= row_begin and jx <= row_end
-          row_items.push(col)
-        end
+    for jx in row_begin..row_end
+      for kx in col_begin..col_end
+        row_items.push(matrix[jx][kx])
       end
     end
     if row_items.uniq.count < 9
