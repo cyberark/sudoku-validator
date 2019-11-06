@@ -41,34 +41,13 @@ class SudokuValidator
       end
 
     # validate squares
-    if !boxCheck(str, 0, 2, 0, 2)
-      return false
+    for jx in [0, 4, 8]
+      for kx in [0, 4, 8]
+        if !boxCheck(str, jx, jx + 2, kx, kx + 2)
+          return false
+        end
+      end
     end
-    if !boxCheck(str, 0, 2, 4, 6)
-      return false
-    end
-    if !boxCheck(str, 0, 2, 8, 10)
-      return false
-    end
-    if !boxCheck(str, 4, 6, 0, 2)
-      return false
-    end
-    if !boxCheck(str, 4, 6, 4, 6)
-      return false
-    end
-    if !boxCheck(str, 4, 6, 8, 10)
-      return false
-    end
-    if !boxCheck(str, 8, 10, 0, 2)
-      return false
-    end
-    if !boxCheck(str, 8, 10, 4, 6)
-      return false
-    end
-    if !boxCheck(str, 8, 10, 8, 10)
-      return false
-    end
-
     return true
   end
 
