@@ -50,9 +50,9 @@ class SudokuValidator
       end
 
     # validate squares
-    for jx in [0, 4, 8]
-      for kx in [0, 4, 8]
-        if !boxCheck(str, jx, jx + 2, kx, kx + 2)
+    for jx in [0, 3, 6]
+      for kx in [0, 3, 6]
+        if !boxCheck(matrix, jx, jx + 2, kx, kx + 2)
           return false
         end
       end
@@ -60,10 +60,10 @@ class SudokuValidator
     return true
   end
 
-  def boxCheck(str, row_begin, row_end, col_begin, col_end)
+  def boxCheck(matrix, row_begin, row_end, col_begin, col_end)
     row_items = []
-    str.split("\n").each_with_index do |row, jx|
-      row.split(' ').each_with_index do |col, kx|
+    matrix.each_with_index do |row, jx|
+      row.each_with_index do |col, kx|
         if kx >= col_begin and kx <= col_end && jx >= row_begin and jx <= row_end
           row_items.push(col)
         end
