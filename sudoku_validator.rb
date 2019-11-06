@@ -11,7 +11,6 @@ class SudokuValidator
         box_height = ix;
       end
     end
-    num_values = matrix.count
 
     # validate horizontal rows
     return false unless box_check(matrix, 1)
