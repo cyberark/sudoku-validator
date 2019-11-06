@@ -1,6 +1,15 @@
 class SudokuValidator
 
   def valid?(str)
+    # convert string to matrix
+    matrix = []
+    str.split("\n").each do |row|
+      if !row.include? "+"
+        matrix.push(row.split(/ \| | /))
+      end
+    end
+    p matrix
+
     # validate horizontal rows
     str.split("\n").each do |row|
       if !row.include? "+"
