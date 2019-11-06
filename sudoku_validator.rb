@@ -49,10 +49,7 @@ class SudokuValidator
         row_items.push(matrix[jx][kx])
       end
     end
-    if row_items.uniq.count < matrix.count
-      return false
-    end
-    return true
+    return row_items.uniq.count == matrix.count
   end
 
 end
