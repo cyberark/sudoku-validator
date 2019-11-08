@@ -1,15 +1,7 @@
 class SudokuValidator
   def valid?(str)
     # convert string to @matrix
-    box_height = 0
-    @matrix = []
-    str.split("\n").each_with_index do |row, ix|
-      if !row.include? '+'
-        @matrix.push(row.split(/ \| | /))
-      elsif box_height.zero?
-        box_height = ix
-      end
-    end
+    box_height = convert_string_to_matrix(str)
 
     return false unless correctly_formatted_input?(str, box_height)
 
@@ -45,6 +37,19 @@ class SudokuValidator
       end
     end
     row_items.uniq.count == @matrix.count
+  end
+
+  def convert_string_to_matrix(str)
+    box_height = 0
+    @matrix = []
+    str.split("\n").each_with_index do |row, ix|
+      if !row.include? '+'
+        @matrix.push(row.split(/ \| | /))
+      elsif box_height.zero?
+        box_height = ix
+      end
+    end
+    box_height
   end
 
   def correctly_formatted_input?(str, box_height)
