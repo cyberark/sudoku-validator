@@ -27,16 +27,21 @@ class SudokuValidator
     box_width = matrix.count / box_height
     box_width.times do |box_x|
       box_height.times do |box_y|
-        row_items = []
-        box_height.times do |cell_x|
-          box_width.times do |cell_y|
-            row_items.push(matrix[box_x * box_height + cell_x][box_y * box_width + cell_y])
-          end
-        end
-        return false unless row_items.uniq.count == matrix.count
+        return false unless box_valid?(matrix, box_height, box_x, box_y)
       end
     end
     return true
+  end
+
+  def box_valid?(matrix, box_height, box_x, box_y)
+    box_width = matrix.count / box_height
+    row_items = []
+    box_height.times do |cell_x|
+      box_width.times do |cell_y|
+        row_items.push(matrix[box_x * box_height + cell_x][box_y * box_width + cell_y])
+      end
+    end
+    return row_items.uniq.count == matrix.count
   end
 
   def correctly_formatted_input?(str, matrix, box_height)
