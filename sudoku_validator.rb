@@ -30,7 +30,7 @@ class SudokuValidator
         return false unless single_box_valid?(box_height, row_of_boxes, col_of_boxes)
       end
     end
-    return true
+    true
   end
 
   def single_box_valid?(box_height, row_of_boxes, col_of_boxes)
@@ -41,7 +41,7 @@ class SudokuValidator
         row_items.push(@matrix[row_of_boxes * box_height + row_within_box][col_of_boxes * box_width + col_within_box])
       end
     end
-    return row_items.uniq.count == @matrix.count
+    row_items.uniq.count == @matrix.count
   end
 
   def correctly_formatted_input?(str, box_height)
@@ -76,7 +76,7 @@ class SudokuValidator
         end
       end
     end
-    return true
+    true
   end
 
 end
