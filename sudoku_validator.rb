@@ -1,7 +1,4 @@
 class SudokuValidator
-
-  @matrix
-
   def valid?(str)
     # convert string to @matrix
     box_height = 0
