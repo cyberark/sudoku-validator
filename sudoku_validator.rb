@@ -25,20 +25,20 @@ class SudokuValidator
 
   def all_boxes_valid?(matrix, box_height)
     box_width = matrix.count / box_height
-    box_width.times do |box_x|
-      box_height.times do |box_y|
-        return false unless box_valid?(matrix, box_height, box_x, box_y)
+    box_width.times do |row_of_boxes|
+      box_height.times do |col_of_boxes|
+        return false unless single_box_valid?(matrix, box_height, row_of_boxes, col_of_boxes)
       end
     end
     return true
   end
 
-  def box_valid?(matrix, box_height, box_x, box_y)
+  def single_box_valid?(matrix, box_height, row_of_boxes, col_of_boxes)
     box_width = matrix.count / box_height
     row_items = []
-    box_height.times do |cell_x|
-      box_width.times do |cell_y|
-        row_items.push(matrix[box_x * box_height + cell_x][box_y * box_width + cell_y])
+    box_height.times do |row_within_box|
+      box_width.times do |col_within_box|
+        row_items.push(matrix[row_of_boxes * box_height + row_within_box][col_of_boxes * box_width + col_within_box])
       end
     end
     return row_items.uniq.count == matrix.count
