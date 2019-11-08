@@ -27,7 +27,9 @@ class SudokuValidator
     box_width = @matrix.count / box_height
     box_width.times do |row_of_boxes|
       box_height.times do |col_of_boxes|
-        return false unless single_box_valid?(box_height, row_of_boxes, col_of_boxes)
+        unless single_box_valid?(box_height, row_of_boxes, col_of_boxes)
+          return false
+        end
       end
     end
     true
@@ -38,7 +40,8 @@ class SudokuValidator
     row_items = []
     box_height.times do |row_within_box|
       box_width.times do |col_within_box|
-        row_items.push(@matrix[row_of_boxes * box_height + row_within_box][col_of_boxes * box_width + col_within_box])
+        row_items.push(@matrix[row_of_boxes * box_height + row_within_box][
+          col_of_boxes * box_width + col_within_box])
       end
     end
     row_items.uniq.count == @matrix.count
