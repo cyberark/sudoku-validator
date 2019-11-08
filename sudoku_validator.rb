@@ -6,7 +6,7 @@ class SudokuValidator
     str.split("\n").each_with_index do |row, ix|
       if !row.include? '+'
         @matrix.push(row.split(/ \| | /))
-      elsif box_height == 0
+      elsif box_height.zero?
         box_height = ix
       end
     end
@@ -18,8 +18,9 @@ class SudokuValidator
     # validate vertical rows
     return false unless all_boxes_valid?(@matrix.count)
     # validate boxes
-    return true if box_height == 0
-    return all_boxes_valid?(box_height)
+    return true if box_height.zero?
+
+    all_boxes_valid?(box_height)
   end
 
   def all_boxes_valid?(box_height)
