@@ -15,15 +15,15 @@ class SudokuValidator
     return false unless correctly_formatted_input?(str, matrix, box_height)
 
     # validate horizontal rows
-    return false unless box_check(matrix, 1)
+    return false unless all_boxes_valid?(matrix, 1)
     # validate vertical rows
-    return false unless box_check(matrix, matrix.count)
+    return false unless all_boxes_valid?(matrix, matrix.count)
     # validate boxes
     return true if box_height == 0
-    return box_check(matrix, box_height)
+    return all_boxes_valid?(matrix, box_height)
   end
 
-  def box_check(matrix, box_height)
+  def all_boxes_valid?(matrix, box_height)
     box_width = matrix.count / box_height
     box_width.times do |box_x|
       box_height.times do |box_y|
