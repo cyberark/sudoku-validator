@@ -6,8 +6,8 @@ describe SudokuValidator do
     @sudoku_validator = SudokuValidator.new
   end
 
-  describe ".validate" do
-    it "returns true when given a valid 9x9 grid" do
+  describe '.validate' do
+    it 'returns true when given a valid 9x9 grid' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -24,7 +24,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 9x9 grid (original test)" do
+    it 'returns false when given an invalid 9x9 grid (original test)' do
       invalid_grid = [
         '3 3 5 | 2 6 9 | 7 8 1',
         '3 8 2 | 5 7 1 | 4 9 3',
@@ -41,7 +41,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 9x9 grid (horizontal error)" do
+    it 'returns false when given an invalid 9x9 grid (horizontal error)' do
       invalid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -58,7 +58,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 9x9 grid (vertical error)" do
+    it 'returns false when given an invalid 9x9 grid (vertical error)' do
       invalid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -75,7 +75,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 9x9 grid (box error)" do
+    it 'returns false when given an invalid 9x9 grid (box error)' do
       invalid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -92,7 +92,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns true when given a valid 4x4 grid" do
+    it 'returns true when given a valid 4x4 grid' do
       valid_grid = [
         '1 2 | 3 4',
         '3 4 | 1 2',
@@ -103,7 +103,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 4x4 grid (horizontal error)" do
+    it 'returns false when given an invalid 4x4 grid (horizontal error)' do
       invalid_grid = [
         '1 2 | 3 4',
         '3 4 | 1 2',
@@ -114,7 +114,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 4x4 grid (vertical error)" do
+    it 'returns false when given an invalid 4x4 grid (vertical error)' do
       invalid_grid = [
         '1 2 | 3 4',
         '3 4 | 1 2',
@@ -125,7 +125,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 4x4 grid (box error)" do
+    it 'returns false when given an invalid 4x4 grid (box error)' do
       invalid_grid = [
         '1 2 | 3 4',
         '2 3 | 4 1',
@@ -136,7 +136,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns true when given a valid 6x6 grid" do
+    it 'returns true when given a valid 6x6 grid' do
       valid_grid = [
         '1 2 | 3 4 | 5 6',
         '3 4 | 5 6 | 1 2',
@@ -149,7 +149,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 6x6 grid (horizontal error)" do
+    it 'returns false when given an invalid 6x6 grid (horizontal error)' do
       invalid_grid = [
         '1 2 | 3 4 | 5 6',
         '3 4 | 5 6 | 1 2',
@@ -162,7 +162,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 6x6 grid (vertical error)" do
+    it 'returns false when given an invalid 6x6 grid (vertical error)' do
       invalid_grid = [
         '1 2 | 3 4 | 5 6',
         '3 4 | 5 6 | 1 2',
@@ -175,7 +175,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 6x6 grid (box error)" do
+    it 'returns false when given an invalid 6x6 grid (box error)' do
       invalid_grid = [
         '1 2 | 3 5 | 4 6',
         '3 4 | 5 1 | 6 2',
@@ -188,7 +188,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns true when given a valid 8x8 grid" do
+    it 'returns true when given a valid 8x8 grid' do
       valid_grid = [
         '1 2 3 4 | 5 6 7 8',
         '5 6 7 8 | 1 2 3 4',
@@ -205,7 +205,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 8x8 grid (horizontal error)" do
+    it 'returns false when given an invalid 8x8 grid (horizontal error)' do
       invalid_grid = [
         '1 2 3 4 | 5 6 7 8',
         '5 6 7 8 | 1 2 3 4',
@@ -222,7 +222,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 8x8 grid (vertical error)" do
+    it 'returns false when given an invalid 8x8 grid (vertical error)' do
       invalid_grid = [
         '1 2 3 4 | 5 6 7 8',
         '5 6 7 8 | 1 2 3 4',
@@ -239,7 +239,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 8x8 grid (box error)" do
+    it 'returns false when given an invalid 8x8 grid (box error)' do
       invalid_grid = [
         '1 2 3 4 | 5 6 7 8',
         '5 6 7 8 | 1 2 3 4',
@@ -256,7 +256,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns true when given a valid 16x16 grid" do
+    it 'returns true when given a valid 16x16 grid' do
       valid_grid = [
         '0 1 2 3 | 4 5 6 7 | 8 9 a b | c d e f',
         '4 5 6 7 | 8 9 a b | c d e f | 0 1 2 3',
@@ -281,7 +281,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 16x16 grid (horizontal error)" do
+    it 'returns false when given an invalid 16x16 grid (horizontal error)' do
       invalid_grid = [
         '0 1 2 3 | 4 5 6 7 | 8 9 a b | c d e f',
         '4 5 6 7 | 8 9 a b | c d e f | 0 1 2 3',
@@ -306,7 +306,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 16x16 grid (vertical error)" do
+    it 'returns false when given an invalid 16x16 grid (vertical error)' do
       invalid_grid = [
         '0 1 2 3 | 4 5 6 7 | 8 9 a b | c d e f',
         '4 5 6 7 | 8 9 a b | c d e f | 0 1 2 3',
@@ -331,7 +331,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 16x16 grid (box error)" do
+    it 'returns false when given an invalid 16x16 grid (box error)' do
       invalid_grid = [
         '0 1 2 3 | 4 5 6 7 | 8 9 a b | c d e f',
         '4 5 6 7 | 8 9 a b | c d e f | 0 1 2 3',
@@ -356,7 +356,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns true when given a valid 15x15 grid" do
+    it 'returns true when given a valid 15x15 grid' do
       valid_grid = [
         '1 2 3 | 4 5 6 | 7 8 9 | a b c | d e f',
         '4 5 6 | 7 8 9 | a b c | d e f | 1 2 3',
@@ -379,7 +379,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal true
     end
 
-    it "returns false when given an invalid 15x15 grid (horizontal error)" do
+    it 'returns false when given an invalid 15x15 grid (horizontal error)' do
       invalid_grid = [
         '1 2 3 | 4 5 6 | 7 8 9 | a b c | d e f',
         '4 5 6 | 7 8 9 | a b c | d e f | 1 2 3',
@@ -402,7 +402,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 15x15 grid (vertical error)" do
+    it 'returns false when given an invalid 15x15 grid (vertical error)' do
       invalid_grid = [
         '1 2 3 | 4 5 6 | 7 8 9 | a b c | d e f',
         '4 5 6 | 7 8 9 | a b c | d e f | 1 2 3',
@@ -425,7 +425,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given an invalid 15x15 grid (box error)" do
+    it 'returns false when given an invalid 15x15 grid (box error)' do
       invalid_grid = [
         '1 2 3 | 4 5 6 | 7 8 9 | a b c | d e f',
         '4 5 6 | 7 8 9 | a b c | d e f | 1 2 3',
@@ -448,7 +448,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(invalid_grid).must_equal false
     end
 
-    it "returns false when given a nonsquare grid" do
+    it 'returns false when given a nonsquare grid' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -465,7 +465,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal false
     end
 
-    it "returns false when given a grid with too many values" do
+    it 'returns false when given a grid with too many values' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -482,7 +482,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal false
     end
 
-    it "returns false when given a grid with nonuniform boxes (height)" do
+    it 'returns false when given a grid with nonuniform boxes (height)' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -499,7 +499,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal false
     end
 
-    it "returns false when given a grid with an unexpected character in a box line" do
+    it 'returns false when given a grid with an unexpected character in a box line' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
@@ -516,7 +516,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal false
     end
 
-    it "returns false when given a grid with nonuniform boxes (width)" do
+    it 'returns false when given a grid with nonuniform boxes (width)' do
       valid_grid = [
         '4 3 5 2 | 6 9 | 7 8 1',
         '6 8 2 5 | 7 1 | 4 9 3',
@@ -533,7 +533,7 @@ describe SudokuValidator do
       @sudoku_validator.valid?(valid_grid).must_equal false
     end
 
-    it "returns false when given a grid with an unexpected vertical line" do
+    it 'returns false when given a grid with an unexpected vertical line' do
       valid_grid = [
         '4 3 5 | 2 6 9 | 7 8 1',
         '6 8 2 | 5 7 1 | 4 9 3',
