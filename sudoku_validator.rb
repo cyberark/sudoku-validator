@@ -156,7 +156,7 @@ class SudokuValidator
       return false
     end
 
-    return true
+    true
   end
 
 end
