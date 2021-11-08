@@ -18,9 +18,8 @@ class SudokuValidator
     end
 
     # validate vertical rows
-    i = 0
     column_index = 0
-    while i < 9
+    9.times do
       row_items = []
       str.split("\n").each { |row|
         if row != '------+------+------'
@@ -37,12 +36,10 @@ class SudokuValidator
           end
         end
 
-        i += 1
       end
 
     # validate squares
     # squares blocks row 1
-    i = 0
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
