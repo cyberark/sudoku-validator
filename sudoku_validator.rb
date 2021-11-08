@@ -3,17 +3,17 @@ class SudokuValidator
   def valid?(str)
     # validate horizontal rows
     str.split("\n").each do |row|
-      if row != '------+------+------'
-        rowItems = []
-        row.split(' ').each do |col|
-          if col != '|'
-            rowItems.push(col)
-          end
+      next if row == '------+------+------'
+
+      rowItems = []
+      row.split(' ').each do |col|
+        if col != '|'
+          rowItems.push(col)
         end
-        puts rowItems.uniq.count
-        if rowItems.uniq.count < 9
-          return false
-        end
+      end
+      puts rowItems.uniq.count
+      if rowItems.uniq.count < 9
+        return false
       end
     end
 
