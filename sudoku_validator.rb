@@ -4,11 +4,11 @@ class SudokuValidator
     str.split("\n").each do |row|
       next if row == '------+------+------'
 
-      rowItems = []
+      row_items = []
       row.split(' ').each do |col|
-        rowItems.push(col) if col != '|'
+        row_items.push(col) if col != '|'
       end
-      return false if rowItems.uniq.count < 9
+      return false if row_items.uniq.count < 9
     end
 
     # validate vertical rows
