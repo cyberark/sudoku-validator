@@ -21,11 +21,11 @@ class SudokuValidator
     column_index = 0
     9.times do
       row_items = []
-      str.split("\n").each { |row|
+      str.split("\n").each do |row|
         if row != '------+------+------'
           row_items << row[column_index]
         end
-      }
+      end
       # puts "selected items: #{row_items.inspect}"
         if row_items.uniq.count < 9
           return false
