@@ -11,7 +11,6 @@ class SudokuValidator
           rowItems.push(col)
         end
       end
-      puts rowItems.uniq.count
       if rowItems.uniq.count < 9
         return false
       end
@@ -26,7 +25,6 @@ class SudokuValidator
           row_items << row[column_index]
         end
       end
-      # puts "selected items: #{row_items.inspect}"
         if row_items.uniq.count < 9
           return false
         else
@@ -44,7 +42,6 @@ class SudokuValidator
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
         if k >= 0 and k < 3 && j >=0 and j < 3
-          # puts "col: #{col}"
           row_items.push(col)
         end
       end
@@ -57,7 +54,6 @@ class SudokuValidator
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
         if k >= 4 and k < 7 && j >=0 and j < 3
-          # puts "col: #{col}"
           row_items.push(col)
         end
       end
@@ -83,7 +79,6 @@ class SudokuValidator
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
         if k >= 0 and k < 3 && j >=4 and j < 7
-          # puts "col: #{col}"
           row_items.push(col)
         end
       end
