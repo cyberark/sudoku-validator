@@ -18,12 +18,10 @@ class SudokuValidator
       str.split("\n").each do |row|
         row_items << row[column_index] if row != '------+------+------'
       end
-      if row_items.uniq.count < 9
-        return false
-      else
-        column_index += 2
-        column_index += 2 if str.split("\n").first[column_index] == '|'
-      end
+      return false if row_items.uniq.count < 9
+
+      column_index += 2
+      column_index += 2 if str.split("\n").first[column_index] == '|'
     end
 
     # validate squares
