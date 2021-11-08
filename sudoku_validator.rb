@@ -32,7 +32,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 0 and k < 3 && j >=0 and j < 3)
+        row_items.push(col) if (k >= 0 && k < 3 && j >=0 && j < 3)
       end
     end
     return false if row_items.uniq.count < 9
@@ -40,7 +40,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 4 and k < 7 && j >=0 and j < 3)
+        row_items.push(col) if (k >= 4 && k < 7 && j >=0 && j < 3)
       end
     end
     return false if row_items.uniq.count < 9
@@ -48,7 +48,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if k >= 8 and k < 11 && j >=0 and j < 3
+        row_items.push(col) if k >= 8 && k < 11 && j >=0 && j < 3
       end
     end
     return false if row_items.uniq.count < 9
@@ -57,7 +57,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 0 and k < 3 && j >=4 and j < 7)
+        row_items.push(col) if (k >= 0 && k < 3 && j >=4 && j < 7)
       end
     end
     return false if row_items.uniq.count < 9
@@ -65,7 +65,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 4 and k < 7 && j >=4 and j < 7)
+        row_items.push(col) if (k >= 4 && k < 7 && j >=4 && j < 7)
       end
     end
     return false if row_items.uniq.count < 9
@@ -73,7 +73,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 8 and k < 11 && j >=4 and j < 7)
+        row_items.push(col) if (k >= 8 && k < 11 && j >=4 && j < 7)
       end
     end
     return false if row_items.uniq.count < 9
@@ -82,7 +82,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 0 and k < 3 && j >=8 and j < 11)
+        row_items.push(col) if (k >= 0 && k < 3 && j >=8 && j < 11)
       end
     end
     return false if row_items.uniq.count < 9
@@ -90,7 +90,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 4 and k < 7 && j >=8 and j < 11)
+        row_items.push(col) if (k >= 4 && k < 7 && j >=8 && j < 11)
       end
     end
     return false if row_items.uniq.count < 9
@@ -98,7 +98,7 @@ class SudokuValidator
     row_items = []
     str.split("\n").each_with_index do |row, j|
       row.split(' ').each_with_index do |col, k|
-        row_items.push(col) if (k >= 8 and k < 11 && j >=8 and j < 11)
+        row_items.push(col) if (k >= 8 && k < 11 && j >=8 && j < 11)
       end
     end
     return false if row_items.uniq.count < 9
