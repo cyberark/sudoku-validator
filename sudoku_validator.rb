@@ -12,12 +12,9 @@ class SudokuValidator
   private
 
   def valid_horizontal_rows?(rows)
-    rows.each do |row|
-      row_items = []
-      row.split(' ').each do |col|
-        row_items.push(col) if col != '|'
-      end
-      return false if row_items.uniq.count < 9
+    rows.map { |row| row.delete('|') }.each do |row|
+      numbers = row.gsub(/\s+/, '').split('')
+      numbers.uniq.count < 9
     end
   end
 
