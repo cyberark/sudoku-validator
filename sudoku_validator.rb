@@ -39,9 +39,9 @@ class SudokuValidator
       column_indices.map do |column_index_range|
         square = rows[row_index_range].map { |row| row[column_index_range] }
         unique_numbers = square.join.gsub(/\s+/, '').split('').uniq
-        unique_numbers.count == 9
+        return false if unique_numbers.count < 9
       end
     end
-    valid_squares.flatten.all? true
+    true
   end
 end
