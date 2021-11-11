@@ -1,162 +1,45 @@
+# frozen_string_literal: true
+
 class SudokuValidator
+  attr_accessor :rows
 
-  def valid?(str)
-    # validate horizontal rows
-    str.split("\n").each do |row|
-      if row != '------+------+------'
-        rowItems = []
-        row.split(' ').each do |col|
-          if col != '|'
-            rowItems.push(col)
-          end
-        end
-        puts rowItems.uniq.count
-        if rowItems.uniq.count < 9
-          return false
-        end
-      end
-    end
-
-    # validate vertical rows
-    i = 0
-    column_index = 0
-    while i < 9
-      row_items = []
-      str.split("\n").each { |row|
-        if row != '------+------+------'
-          row_items << row[column_index]
-        end
-      }
-      # puts "selected items: #{row_items.inspect}"
-        if row_items.uniq.count < 9
-          return false
-        else
-          column_index += 2
-          if str.split("\n").first[column_index] == '|'
-            column_index += 2
-          end
-        end
-
-        i += 1
-      end
-
-    # validate squares
-    # squares blocks row 1
-    i = 0
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=0 and j < 3
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=0 and j < 3
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=0 and j < 3
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    # squares blocks row 2
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=4 and j < 7
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    # squares blocks row 3
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    return true
+  def initialize(str)
+    @rows = str.split("\n").reject { |r| r == '------+------+------' }
   end
 
+  def valid?
+    valid_squares? && valid_horizontal_rows? && valid_vertical_rows?
+  end
+
+  private
+
+  def valid_horizontal_rows?
+    rows.map { |row| row.delete('|') }.each do |row|
+      numbers = row.gsub(/\s+/, '').split('')
+      return false if numbers.uniq.count < 9
+    end
+    true
+  end
+
+  def valid_vertical_rows?
+    column_indices = (0..8)
+    column_indices.each do |index|
+      numbers = rows.map { |row| row.delete('|').gsub(/\s+/, '') }.map { |row| row[index] }.uniq
+      return false if numbers.count < 9
+    end
+    true
+  end
+
+  def valid_squares?
+    row_indices = [0..2, 3..5, 6..8]
+    column_block_indices = [0, 1, 2]
+    row_indices.map do |row_index|
+      column_block_indices.map do |column_index|
+        square = rows[row_index].map { |str| str.split(' | ') }.map { |arr| arr[column_index] }
+        unique_numbers = square.join.gsub(/\s+/, '').split('').uniq
+        return false if unique_numbers.count < 9
+      end
+    end
+    true
+  end
 end
