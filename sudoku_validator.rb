@@ -14,8 +14,9 @@ class SudokuValidator
   def valid_horizontal_rows?(rows)
     rows.map { |row| row.delete('|') }.each do |row|
       numbers = row.gsub(/\s+/, '').split('')
-      numbers.uniq.count < 9
+      return false if numbers.uniq.count < 9
     end
+    true
   end
 
   def valid_vertical_rows?(str)
