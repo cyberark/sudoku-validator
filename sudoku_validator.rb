@@ -16,18 +16,13 @@ class SudokuValidator
     true
   end
 
-  def valid_vertical_rows?(str)
-    column_index = 0
-    9.times do
-      row_items = []
-      str.split("\n").each do |row|
-        row_items << row[column_index]
-      end
-      return false if row_items.uniq.count < 9
-
-      column_index += 2
-      column_index += 2 if str.split("\n").first[column_index] == '|'
+  def valid_vertical_rows?
+    column_indices = (0..8)
+    column_indices.each do |index|
+      numbers = rows.map { |row| row.delete('|').gsub(/\s+/, '') }.map { |row| row[index] }.uniq
+      return false if numbers.count < 9
     end
+    true
   end
 
   def valid_squares?(rows)
