@@ -3,10 +3,7 @@
 class SudokuValidator
   def valid?(str)
     rows = str.split("\n").reject { |r| r == '------+------+------' }
-
-    return false unless valid_horizontal_rows?(rows) && valid_vertical_rows?(str)
-
-    valid_squares?(rows)
+    valid_squares?(rows) && valid_horizontal_rows?(rows) && valid_vertical_rows?(rows)
   end
 
   private
