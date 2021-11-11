@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
 class SudokuValidator
-  def valid?(str)
-    rows = str.split("\n").reject { |r| r == '------+------+------' }
-    valid_squares?(rows) && valid_horizontal_rows?(rows) && valid_vertical_rows?(rows)
+  attr_accessor :rows
+
+  def initialize(str)
+    @rows = str.split("\n").reject { |r| r == '------+------+------' }
+  end
+
+  def valid?
+    valid_squares? && valid_horizontal_rows? && valid_vertical_rows?
   end
 
   private
 
-  def valid_horizontal_rows?(rows)
+  def valid_horizontal_rows?
     rows.map { |row| row.delete('|') }.each do |row|
       numbers = row.gsub(/\s+/, '').split('')
       return false if numbers.uniq.count < 9
@@ -25,12 +30,12 @@ class SudokuValidator
     true
   end
 
-  def valid_squares?(rows)
+  def valid_squares?
     row_indices = [0..2, 3..5, 6..8]
-    column_indices = [0..5, 7..12, 15..20]
-    valid_squares = row_indices.map do |row_index_range|
-      column_indices.map do |column_index_range|
-        square = rows[row_index_range].map { |row| row[column_index_range] }
+    column_block_indices = [0, 1, 2]
+    row_indices.map do |row_index|
+      column_block_indices.map do |column_index|
+        square = rows[row_index].map { |str| str.split(' | ') }.map { |arr| arr[column_index] }
         unique_numbers = square.join.gsub(/\s+/, '').split('').uniq
         return false if unique_numbers.count < 9
       end
