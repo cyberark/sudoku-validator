@@ -1,44 +1,15 @@
+require "logger"
+
 class SudokuValidator
 
   def valid?(str)
-    # validate horizontal rows
-    str.split("\n").each do |row|
-      if row != '------+------+------'
-        rowItems = []
-        row.split(' ').each do |col|
-          if col != '|'
-            rowItems.push(col)
-          end
-        end
-        puts rowItems.uniq.count
-        if rowItems.uniq.count < 9
-          return false
-        end
-      end
-    end
+    @logger = Logger.new(STDOUT)
+     # validate horizontal rows
+    @logger.debug("Valid rows result = " + valid_rows?(str).to_s)
 
     # validate vertical rows
-    i = 0
-    column_index = 0
-    while i < 9
-      row_items = []
-      str.split("\n").each { |row|
-        if row != '------+------+------'
-          row_items << row[column_index]
-        end
-      }
-      # puts "selected items: #{row_items.inspect}"
-        if row_items.uniq.count < 9
-          return false
-        else
-          column_index += 2
-          if str.split("\n").first[column_index] == '|'
-            column_index += 2
-          end
-        end
+    @logger.debug("Valid columns result = " + valid_columns?(str).to_s)
 
-        i += 1
-      end
 
     # validate squares
     # squares blocks row 1
@@ -158,5 +129,47 @@ class SudokuValidator
 
     return true
   end
+
+  def valid_rows?(str)
+    row_items = []
+    rows = str.split("\n").reject { |y| y == "------+------+------" }
+    rows.each do |row|
+        cols = row.split(" ").reject { |x| x == "|" }
+        cols.each do |col|
+          row_items << col;
+        end
+      # Evaluate row for uniqueness
+      if(row_items.uniq.count != 9)
+        return false
+      end
+    end
+    return true
+  end
+
+  def valid_columns?(str)
+    for i in 0..8 do
+      spacerCol = true;
+      col_items = []
+      # make rows instance var?
+      rows = str.split("\n").reject { |y| y == "------+------+------" }
+      rows.each do |row|
+        break if row[i] == " " || row[i] ==  "|"
+        col_items << row[i]
+        spacerCol = false;
+      end
+      # Evaluate columns for uniqueness
+      if(spacerCol == false && col_items.uniq.count != 9)
+        @logger.debug("Validated column " + col_items.to_s)
+        return false
+      end
+    end
+    return true
+  end  
+
+  def valid_squares?(str)
+
+    
+  end
+
 
 end
