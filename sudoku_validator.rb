@@ -10,6 +10,9 @@ class SudokuValidator
     # validate vertical rows
     @logger.debug("Valid columns result = " + valid_columns?(str).to_s)
 
+    # validate vertical rows
+    @logger.debug("Valid squares result = " + valid_squares?(str).to_s)
+
 
     # validate squares
     # squares blocks row 1
@@ -168,8 +171,49 @@ class SudokuValidator
 
   def valid_squares?(str)
 
-    
-  end
+    squares = [];
+    y = 0;
+    x = 0;
+    rows = str.split("\n").reject { |y| y == "------+------+------" }
+    rows.each do |row|
+      cols = row.split(" ").reject { |x| x == "|" }
+      cols.each do |col|
+        case
+          when x.between(0..2)
+            case
+              when y.between(0..2)
+                squares[0] << col
+              when y.between(3..5)
+                squares[1] << col
+              when y.between(6..8)
+                squares[2] << col
+            end
+          when x.between(3..5)
+            case
+              when y.between(0..2)
+                squares[3] << col
+              when y.between(3..5)
+                squares[4] << col
+              when y.between(6..8)
+                squares[5] << col
+            end
+          when x.between(6..8)
+            case
+              when y.between(0..2)
+                squares[6] << col
+              when y.between(3..5)
+                squares[7] << col
+              when y.between(6..8)
+                squares[8] << col
+            end
+        end
+        y++
+      end
+      x++
+    end
+      @logger.debug("Squares: " + squares.to_s)
 
+  
+  end
 
 end
