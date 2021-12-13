@@ -1,162 +1,95 @@
 class SudokuValidator
 
-  def valid?(str)
-    # validate horizontal rows
-    str.split("\n").each do |row|
-      if row != '------+------+------'
-        rowItems = []
-        row.split(' ').each do |col|
-          if col != '|'
-            rowItems.push(col)
-          end
-        end
-        puts rowItems.uniq.count
-        if rowItems.uniq.count < 9
-          return false
-        end
-      end
-    end
+	def valid?(str)
+    @rows = str.split("\n").reject { |y| y == "------+------+------" }
+		return valid_rows? && valid_columns? && valid_squares?
+	end
 
-    # validate vertical rows
-    i = 0
-    column_index = 0
-    while i < 9
-      row_items = []
-      str.split("\n").each { |row|
-        if row != '------+------+------'
-          row_items << row[column_index]
-        end
-      }
-      # puts "selected items: #{row_items.inspect}"
-        if row_items.uniq.count < 9
-          return false
-        else
-          column_index += 2
-          if str.split("\n").first[column_index] == '|'
-            column_index += 2
-          end
-        end
+	def valid_rows?
+		row_items = []
+		@rows.each do |row|
+			cols = row.split(" ").reject { |x| x == "|" }
+			cols.each do |col|
+				row_items << col;
+			end
+			# Evaluate row for uniqueness
+			if(row_items.uniq.count != 9)
+				return false
+			end
+		end
+		return true
+	end
 
-        i += 1
-      end
+	def valid_columns?
+		for i in 0..8 do
+			spacerCol = true;
+			col_items = []
+			@rows.each do |row|
+				break if row[i] == " " || row[i] ==  "|"
+				col_items << row[i]
+				spacerCol = false;
+			end
+			# Evaluate column for uniqueness
+			if(spacerCol == false && !is_unique?(col_items))
+				return false
+			end
+		end
+		return true
+	end  
 
-    # validate squares
-    # squares blocks row 1
-    i = 0
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=0 and j < 3
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
+	def valid_squares?
+		squares = [[],[],[],[],[],[],[],[],[]];
+		x = 0
+		@rows.each do |row|
+			cols = row.split(" ").reject { |x| x == "|" }
+			y = 0
+			cols.each do |col|
+				case x
+				when 0..2
+					case y
+					when 0..2
+						squares[0].push(col)
+					when 3..5
+						squares[1].push(col)
+					when 6..8
+						squares[2].push(col)
+					end
+				when 3..5
+					case y
+					when 0..2
+						squares[3].push(col)
+					when 3..5
+						squares[4].push(col)
+					when 6..8
+						squares[5].push(col)
+					end
+				when 6..8
+					case y
+					when 0..2
+						squares[6].push(col)
+					when 3..5
+						squares[7].push(col)
+					when 6..8
+						squares[8].push(col)
+					end
+				end
+				y += 1
+			end
+			x += 1
+		end
 
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=0 and j < 3
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
+    # Evaluate each square for uniqueness
+		squares.each do |square|
+			if !is_unique?(square) 
+				return false
+			end
 
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=0 and j < 3
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
+		end
+		return true
+	end
 
-    # squares blocks row 2
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=4 and j < 7
-          # puts "col: #{col}"
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=4 and j < 7
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    # squares blocks row 3
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 0 and k < 3 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 4 and k < 7 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    row_items = []
-    str.split("\n").each_with_index do |row, j|
-      row.split(' ').each_with_index do |col, k|
-        if k >= 8 and k < 11 && j >=8 and j < 11
-          row_items.push(col)
-        end
-      end
-    end
-    if row_items.uniq.count < 9
-      return false
-    end
-
-    return true
-  end
+	def is_unique?(items)
+		return items.uniq.count == 9
+	end
 
 end
