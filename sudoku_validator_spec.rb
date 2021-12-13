@@ -21,7 +21,7 @@ describe SudokuValidator do
         '2 4 8 | 9 5 7 | 1 3 6',
         '7 6 3 | 4 1 8 | 2 5 9'
       ].join("\n")
-      @sudoku_validator.valid?(grid).must_equal true
+      _(@sudoku_validator.valid?(grid)).must_equal true
     end
   end
 
@@ -39,7 +39,7 @@ describe SudokuValidator do
       '2 4 8 | 9 5 7 | 1 3 6',
       '7 6 3 | 4 1 8 | 2 5 9'
     ].join("\n")
-    @sudoku_validator.valid?(grid).must_equal false
+    _(@sudoku_validator.valid?(grid)).must_equal false
   end
 
 end
